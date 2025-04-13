@@ -1,0 +1,188 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.main {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    background-color: #4CAF50;
+    color: white;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.project-list,
+.sidebar-footer {
+    padding: 10px;
+}
+
+.project-list a,
+.sidebar-footer a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+}
+
+.project-list a:hover,
+.sidebar-footer a:hover,
+.sidebar a:hover {
+    background-color: #45a049;
+}
+
+.content {
+    margin-left: 0;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    position: relative;
+}
+
+#filterToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#filterToggle:hover {
+    background-color: #45a049;
+    transform: scale(1.03);
+}
+
+#filterToggle:active {
+    transform: scale(0.98);
+}
+
+
+.filter-panel {
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 10;
+}
+
+.commit {
+    background-color: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.commit-details {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.commit-details.show {
+    display: block;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scaleY(0.9); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+.project-list div:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.download-btn {
+    background: #2c8cc9;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+.download-btn:hover {
+    background: #18689e;
+}
+
+.download-btn {
+    background: #2c8cc9;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+.download-btn:hover {
+    background: #18689e;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.kanban-board {
+    background: #fff;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.kanban-board h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.kanban-board ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kanban-board li {
+    background: #f1f1f1;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}

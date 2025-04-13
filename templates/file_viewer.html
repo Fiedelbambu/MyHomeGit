@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="toolbar">
+    <button id="toggleTools">🔧 Optionen</button>
+</div>
+
+<div id="toolsPanel" class="filter-panel">
+    <a href="{{ url_for('download_file', project=project, subpath=filepath) }}" class="download-btn">📥 Datei herunterladen</a>
+</div>
+
+<!-- Breadcrumb -->
+<p>
+📁 <a href="{{ url_for('browse_project', project=project) }}">{{ project.replace('.git','') }}</a>
+{% set parts = filepath.split('/') %}
+{% set build_path = '' %}
+{% for part in parts[:-1] %}
+    {% set build_path = build_path + '/' + part %}
+    / <a href="{{ url_for('browse_project', project=project, subpath=build_path.strip('/')) }}">{{ part }}</a>
+{% endfor %}
+    / {{ parts[-1] }}
+</p>
+
+<h2>📄 {{ filepath }}</h2>
+<pre><code class="language-{{ filepath.split('.')[-1]|lower }}">{{ content }}</code></pre>
+
+<a href="{{ url_for('browse_project', project=project, subpath=('/'.join(filepath.split('/')[:-1]) if '/' in filepath else '')) }}">🔙 Zurück</a>
+
+{% endblock %}

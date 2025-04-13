@@ -1,0 +1,7 @@
+{% for c in commits %}
+<div class="commit" onclick="toggleDetails('diff{{ loop.index }}', '{{ c.hash }}', '{{ project }}')">
+    <strong>{{ c.hash[:7] }}</strong> - {{ c.author }} - {{ c.date }}<br>
+    <em>{{ c.message }}</em> {{ c.ref }}
+</div>
+<div class="commit-details" id="diff{{ loop.index }}"></div>
+{% endfor %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Git Web Viewer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</head>
+<body>
+    <header>Git Log Info</header>
+    <div class="main">
+        <div class="sidebar">
+            <div class="project-list">
+                {% for proj in projects %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 0;">
+                        <a href="{{ url_for('git_log', project=proj) }}">📁 {{ proj.replace('.git','') }}</a>
+                        <div style="display: flex; gap: 5px;">
+                            <a href="{{ url_for('browse_project', project=proj) }}" title="Dateien anzeigen" style="text-decoration: none; font-size: 16px;">🔍</a>
+                            <form method="post" action="{{ url_for('delete_project', project=proj) }}" onsubmit="return confirm('Wirklich in den Papierkorb verschieben?');" style="margin: 0;">
+                                <button type="submit" title="In Papierkorb verschieben" style="background: none; border: none; color: red; cursor: pointer; font-size: 16px;">🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="sidebar-footer">
+                <form action="{{ url_for('create_repo') }}" method="post">
+                    <input type="text" name="repo_name" placeholder="Neues Repo" style="width: 100%; margin-bottom: 5px;">
+                    <button type="submit" style="width: 100%;">➕ Erstellen</button>
+                </form>
+                <hr>
+                <a href="{{ url_for('trash_view') }}">🗑️ Papierkorb</a>
+            </div>
+        </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

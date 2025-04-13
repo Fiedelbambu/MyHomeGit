@@ -1,0 +1,15 @@
+<h2>🗑️ Gelöschte Repositories</h2>
+{% if trash_projects %}
+<ul>
+    {% for tp in trash_projects %}
+        <li>
+            {{ tp }}
+            <form method="post" action="{{ url_for('restore_project', project=tp.split('_')[0]) }}" style="display:inline">
+                <button type="submit">🔄 Wiederherstellen</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>🧹 Papierkorb ist leer.</p>
+{% endif %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if trash_projects is defined %}
+        {% include 'trash_view.html' %}
+    {% else %}
+        <button id="filterToggle">⚙️ Filter</button>
+        <div class="filter-panel" id="filterPanel">
+            <label>Zeilenlimit:
+                <select id="lineLimit">
+                    <option value="100">100</option>
+                    <option value="300" selected>300</option>
+                    <option value="500">500</option>
+                </select>
+            </label><br>
+            <label><input type="checkbox" id="textOnly"> Nur Textdateien</label><br>
+            <label><input type="checkbox" id="hideBinary" checked> Binärdateien ausblenden</label>
+        </div>
+        <h2>{{ project.replace('.git','') }} - Commits</h2>
+        {% include 'repo_view.html' %}
+    {% endif %}
+{% endblock %}

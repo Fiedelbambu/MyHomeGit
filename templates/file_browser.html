@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>📂 Dateien in {{ project.replace('.git','') }}</h2>
+
+<!-- Breadcrumb -->
+<p>
+📁 <a href="{{ url_for('browse_project', project=project) }}">{{ project.replace('.git','') }}</a>
+{% set parts = current_path.split('/') if current_path else [] %}
+{% set build_path = '' %}
+{% for part in parts %}
+    {% set build_path = build_path + '/' + part %}
+    / <a href="{{ url_for('browse_project', project=project, subpath=build_path.strip('/')) }}">{{ part }}</a>
+{% endfor %}
+</p>
+
+<ul>
+    {% if current_path %}
+        <li><a href="{{ url_for('browse_project', project=project, subpath=current_path.rsplit('/', 1)[0]) }}">🔙 Zurück</a></li>
+    {% endif %}
+    {% for name, is_dir in entries %}
+        {% if is_dir %}
+            <li>📁 <a href="{{ url_for('browse_project', project=project, subpath=(current_path ~ '/' ~ name).lstrip('/')) }}">{{ name }}</a></li>
+        {% else %}
+            <li>📄 <a href="{{ url_for('browse_project', project=project, subpath=(current_path ~ '/' ~ name).lstrip('/')) }}">{{ name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
